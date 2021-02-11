@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Tower</title>
+    <link href="https://fonts.googleapis.com/css?family=Hanalei+Fill|Homemade+Apple|Major+Mono+Display|Orbitron|Press+Start+2P|Quantico|Rajdhani|Roboto+Mono|Special+Elite|Staatliches" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+<!--  <div id="activate"></div> -->
+  <div id="correct"></div>
+  <div id="search"></div>
+  <script>
+    var randomWord = [{english: "a", japanese: "あ"},{english: "i", japanese: "い"},{english: "u", japanese: "う"},
+    {english: "e", japanese: "え"},{english: "o", japanese: "お"}]
+    var myGamePiece;
+    var objectOne;
+    var objectTwo;
+    var objectThree;
+    var objectFour;
+    var objectFive;
+    var connectedObj = "";
+    var correctAnswer;
+    
+    function startGame() {
+        myGameArea.start();
+        myGamePiece = new component(100, 100, "Avatar1.png", 290, 290, "avatar", "image");
+        objectOne = new component(30, 30, "a.png", 100, 100, "a", "image");
+        objectTwo= new component(30, 30, "i.png", 100, 280, "i", "image");
+        objectThree= new component(30, 30, "u.png", 100, 500, "u", "image");
+        objectFour= new component(30, 30, "e.png", 300, 100, "e", "image");
+        objectFive= new component(30, 30, "o.png", 300, 500, "o", "image");
+        var randomNumber = Math.floor(Math.random() * 5)
+        correctAnswer = randomWord[randomNumber].english
+        console.log(correctAnswer)
+    }
+    
+    var myGameArea = {
+        canvas : document.createElement("canvas"),
+        start : function() {
+            this.canvas.width = 600;
+            this.canvas.height = 600;
+            this.canvas.style = "position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; border:2px solid black";
+            this.context = this.canvas.getContext("2d");
+            document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+            this.interval = setInterval(updateGameArea, 20);
+            window.addEventListener('keydown', function (e) {
+                myGameArea.key = e.keyCode;
+            })
+            window.addEventListener('keyup', function (e) {
+                myGameArea.key = false;
+            })
+        }, 
+        clear : function(){
+            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
+    }
+    
+    function component(width, height, color, x, y, word, type) {
+        this.type = type;
+        if (type == "image") {
+            this.image = new Image();
+            this.image.src = color;
+        }
+        this.gamearea = myGameArea;
+        this.width = width;
+        this.height = height;
+        this.speedX = 0;
+        this.speedY = 0;    
+        this.x = x;
+        this.y = y;
+        this.word = word    
+        this.update = function() {
+            ctx = myGameArea.context;
+            if (type == "image") {
+                ctx.drawImage(this.image, 
+                this.x, 
+                this.y,
+                this.width, this.height);
+            } else {
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        }
+        this.newPos = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;        
+        }
+        this.crashWith = function(otherobj) {
+          var myleft = this.x;
+          var myright = this.x + (this.width);
+          var mytop = this.y;
+          var mybottom = this.y + (this.height);
+          var otherleft = otherobj.x;
+          var otherright = otherobj.x + (otherobj.width);
+          var othertop = otherobj.y;
+          var otherbottom = otherobj.y + (otherobj.height);
+          var crash = true;
+          if ((mybottom < othertop) ||
+          (mytop > otherbottom) ||
+          (myright < otherleft) ||
+          (myleft > otherright)) {
+            crash = false;
+          }
+          return crash;
+  }
+    }
+    
+    
+    function updateGameArea() {
+        myGameArea.clear();
+        myGamePiece.speedX = 0;
+        myGamePiece.speedY = 0;    
+        if (myGameArea.key && myGameArea.key == 65) {
+            myGamePiece.speedX = -2; 
+            myGamePiece.image.src = "Avatar1-left.png";}
+        if (myGameArea.key && myGameArea.key == 68) {
+            myGamePiece.speedX = 2; 
+            myGamePiece.image.src = "Avatar1-right.png";}
+        if (myGameArea.key && myGameArea.key == 87) {
+            myGamePiece.speedY = -2; 
+            myGamePiece.image.src = "Avatar1-back.png";}
+        if (myGameArea.key && myGameArea.key == 83) {
+            myGamePiece.speedY = 2; 
+            myGamePiece.image.src = "Avatar1.png";}
+        myGamePiece.newPos();    
+        myGamePiece.update();
+        objectOne.update();
+        objectTwo.update();
+        objectThree.update();
+        objectFour.update();
+        objectFive.update();
+        if (myGamePiece.crashWith(objectOne)) {
+        //  document.getElementById("activate").innerHTML = objectOne.word;
+          connectedObj = objectOne.word
+        }
+        if (myGamePiece.crashWith(objectTwo)) {
+        //  document.getElementById("activate").innerHTML = objectTwo.word;
+          connectedObj = objectTwo.word
+        }
+        if (myGamePiece.crashWith(objectThree)) {
+        //  document.getElementById("activate").innerHTML = objectThree.word;
+          connectedObj = objectThree.word
+        }
+        if (myGamePiece.crashWith(objectFour)) {
+        //  document.getElementById("activate").innerHTML = objectFour.word;
+          connectedObj = objectFour.word
+        }
+        if (myGamePiece.crashWith(objectFive)) {
+        //  document.getElementById("activate").innerHTML = objectFive.word;
+          connectedObj = objectFive.word
+        }
+       // document.getElementById("activate").innerHTML = connectedObj;
+        if (correctAnswer == connectedObj) {
+          document.getElementById("correct").innerHTML = "CORRECT";
+          var randomNumber = Math.floor(Math.random() * 5)
+          correctAnswer = randomWord[randomNumber].english
+          document.getElementById("search").innerHTML = "Find: " + correctAnswer;
+        }else {
+          document.getElementById("correct").innerHTML = "";
+        }
+       document.getElementById("search").innerHTML = "Find: " + correctAnswer;
+    }
+    $(document).ready (function(){
+    startGame()
+    })
+    </script>
+</body>    
+</html>

@@ -1,0 +1,153 @@
+h1 {
+    font-family: 'Staatliches', cursive;
+    /*font-family: 'Roboto Mono', monospace;
+    font-family: 'Major Mono Display', monospace;
+    font-family: 'Hanalei Fill', cursive;
+    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Orbitron', sans-serif;
+    font-family: 'Special Elite', cursive;
+    font-family: 'Press Start 2P', cursive;
+    font-family: 'Homemade Apple', cursive;
+    font-family: 'Quantico', sans-serif; */
+
+}
+
+.card {
+    background-color: lightblue;
+    height: 150px;
+    outline-style: solid;
+    outline-width: 5px;
+    outline-color: white;
+    font-size: 100px;
+    text-align: center;
+}
+
+#intro1 {
+    visibility: visible;
+    position: fixed;
+    top: 50px;
+    color: white;
+    background-color: olive;
+    text-align: center;
+    margin: 100px;
+    font-size: 25px;
+    padding: 10px;
+    height: 300px;
+    outline-style: solid;
+    outline-width: 8px;
+    outline-color: black;
+}
+#intro2 {
+    visibility: hidden;
+    position: fixed;
+    top: 50px;
+    color: white;
+    background-color: olive;
+    text-align: center;
+    margin: 100px;
+    font-size: 25px;
+    padding: 10px;
+    height: 300px;
+    outline-style: solid;
+    outline-width: 8px;
+    outline-color: black;
+}
+#intro3 {
+    visibility: hidden;
+    position: fixed;
+    top: 50px;
+    color: white;
+    background-color: olive;
+    text-align: center;
+    margin: 100px;
+    font-size: 25px;
+    padding: 10px;
+    height: 300px;
+    outline-style: solid;
+    outline-width: 8px;
+    outline-color: black;
+}
+#intro4 {
+    visibility: hidden;
+    position: fixed;
+    top: 50px;
+    color: white;
+    background-color: olive;
+    text-align: center;
+    margin: 100px;
+    font-size: 25px;
+    padding: 10px;
+    height: 300px;
+    outline-style: solid;
+    outline-width: 8px;
+    outline-color: black;
+}
+#intro5 {
+    visibility: hidden;
+    position: fixed;
+    top: 50px;
+    color: white;
+    background-color: olive;
+    text-align: center;
+    margin: 100px;
+    font-size: 25px;
+    padding: 10px;
+    height: 300px;
+    outline-style: solid;
+    outline-width: 8px;
+    outline-color: black;
+}
+#intro6 {
+    visibility: hidden;
+    position: fixed;
+    top: 50px;
+    color: white;
+    background-color: olive;
+    text-align: center;
+    margin: 100px;
+    font-size: 25px;
+    padding: 10px;
+    height: 300px;
+    outline-style: solid;
+    outline-width: 8px;
+    outline-color: black;
+}
+
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+    position: relative;
+    top: 200px;
+    text-align: center;
+}
+
+#activate {
+    position: relative;
+    top: 0px;
+}
+
+#search {
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Quantico', sans-serif;
+}
+#correct {
+    text-align: center;
+    font-size: 20px;
+    color: green;
+    font-family: 'Quantico', sans-serif;
+}
+
+.dicerow {
+    text-align: center;
+    outline-style: solid;
+    outline-color: pink;
+}
+.dicecol {
+    text-align: center;
+    height: 100px;
+}
+.container {
+    position: relative;
+    top: 120px;
+}
