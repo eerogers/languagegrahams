@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>The Tower</title>
-    <link href="https://fonts.googleapis.com/css?family=Hanalei+Fill|Homemade+Apple|Major+Mono+Display|Orbitron|Press+Start+2P|Quantico|Rajdhani|Roboto+Mono|Special+Elite|Staatliches" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="src/style.css">
-</head>
-<body>
-<!--  <div id="activate"></div> -->
-  <div id="correct"></div>
-  <div id="search"></div>
-  <script>
-    var randomWord = [{english: "a", japanese: "あ"},{english: "i", japanese: "い"},{english: "u", japanese: "う"},
-    {english: "e", japanese: "え"},{english: "o", japanese: "お"}]
+var randomWord = [{english: "pink", japanese: "pinku"},{english: "red", japanese: "aka(i)"},{english: "orange", japanese: "orenji"},
+    {english: "yellow", japanese: "kiiro(i)"},{english: "green", japanese: "midori"},{english: "blue", japanese: "ao(i)"},{english: "purple", japanese: "murasaki"}]
     var myGamePiece;
     var objectOne;
     var objectTwo;
@@ -28,14 +11,16 @@
     
     function startGame() {
         myGameArea.start();
-        myGamePiece = new component(100, 100, "Avatar1.png", 290, 290, "avatar", "image");
-        objectOne = new component(30, 30, "a.png", 100, 100, "a", "image");
-        objectTwo= new component(30, 30, "i.png", 100, 280, "i", "image");
-        objectThree= new component(30, 30, "u.png", 100, 500, "u", "image");
-        objectFour= new component(30, 30, "e.png", 300, 100, "e", "image");
-        objectFive= new component(30, 30, "o.png", 300, 500, "o", "image");
-        var randomNumber = Math.floor(Math.random() * 5)
-        correctAnswer = randomWord[randomNumber].english
+        myGamePiece = new component(30, 30, "black", 290, 290);
+        objectOne = new component(30, 30, "pink", 100, 100, "pinku");
+        objectTwo= new component(30, 30, "red", 100, 280, "aka(i)");
+        objectThree= new component(30, 30, "orange", 100, 500, "orenji");
+        objectFour= new component(30, 30, "yellow", 300, 100, "kiiro(i)");
+        objectFive= new component(30, 30, "green", 300, 500, "midori");
+        objectSix= new component(30, 30, "blue", 500, 100, "ao(i)");
+        objectSeven= new component(30, 30, "purple", 500, 500, "murasaki");
+        var randomNumber = Math.floor(Math.random() * 7)
+        correctAnswer = randomWord[randomNumber].japanese
         console.log(correctAnswer)
     }
     
@@ -60,12 +45,7 @@
         }
     }
     
-    function component(width, height, color, x, y, word, type) {
-        this.type = type;
-        if (type == "image") {
-            this.image = new Image();
-            this.image.src = color;
-        }
+    function component(width, height, color, x, y, word) {
         this.gamearea = myGameArea;
         this.width = width;
         this.height = height;
@@ -76,15 +56,8 @@
         this.word = word    
         this.update = function() {
             ctx = myGameArea.context;
-            if (type == "image") {
-                ctx.drawImage(this.image, 
-                this.x, 
-                this.y,
-                this.width, this.height);
-            } else {
-                ctx.fillStyle = color;
-                ctx.fillRect(this.x, this.y, this.width, this.height);
-            }
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
         }
         this.newPos = function() {
             this.x += this.speedX;
@@ -110,23 +83,14 @@
   }
     }
     
-    
     function updateGameArea() {
         myGameArea.clear();
         myGamePiece.speedX = 0;
         myGamePiece.speedY = 0;    
-        if (myGameArea.key && myGameArea.key == 65) {
-            myGamePiece.speedX = -2; 
-            myGamePiece.image.src = "Avatar1-left.png";}
-        if (myGameArea.key && myGameArea.key == 68) {
-            myGamePiece.speedX = 2; 
-            myGamePiece.image.src = "Avatar1-right.png";}
-        if (myGameArea.key && myGameArea.key == 87) {
-            myGamePiece.speedY = -2; 
-            myGamePiece.image.src = "Avatar1-back.png";}
-        if (myGameArea.key && myGameArea.key == 83) {
-            myGamePiece.speedY = 2; 
-            myGamePiece.image.src = "Avatar1.png";}
+        if (myGameArea.key && myGameArea.key == 65) {myGamePiece.speedX = -2; }
+        if (myGameArea.key && myGameArea.key == 68) {myGamePiece.speedX = 2; }
+        if (myGameArea.key && myGameArea.key == 87) {myGamePiece.speedY = -2; }
+        if (myGameArea.key && myGameArea.key == 83) {myGamePiece.speedY = 2; }
         myGamePiece.newPos();    
         myGamePiece.update();
         objectOne.update();
@@ -134,6 +98,8 @@
         objectThree.update();
         objectFour.update();
         objectFive.update();
+        objectSix.update();
+        objectSeven.update();
         if (myGamePiece.crashWith(objectOne)) {
         //  document.getElementById("activate").innerHTML = objectOne.word;
           connectedObj = objectOne.word
@@ -154,20 +120,24 @@
         //  document.getElementById("activate").innerHTML = objectFive.word;
           connectedObj = objectFive.word
         }
+        if (myGamePiece.crashWith(objectSix)) {
+        //  document.getElementById("activate").innerHTML = objectSix.word;
+          connectedObj = objectSix.word
+        }
+        if (myGamePiece.crashWith(objectSeven)) {
+        //  document.getElementById("activate").innerHTML = objectSeven.word;
+          connectedObj = objectSeven.word
+        }
        // document.getElementById("activate").innerHTML = connectedObj;
         if (correctAnswer == connectedObj) {
-          document.getElementById("correct").innerHTML = "CORRECT";
-          var randomNumber = Math.floor(Math.random() * 5)
-          correctAnswer = randomWord[randomNumber].english
-          document.getElementById("search").innerHTML = "Find: " + correctAnswer;
+            var randomNumber = Math.floor(Math.random() * 7)
+            correctAnswer = randomWord[randomNumber].japanese
+            document.getElementById("search").innerHTML = "Find: " + correctAnswer;
         }else {
           document.getElementById("correct").innerHTML = "";
         }
        document.getElementById("search").innerHTML = "Find: " + correctAnswer;
     }
     $(document).ready (function(){
-    startGame()
+        startGame()
     })
-    </script>
-</body>    
-</html>
