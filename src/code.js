@@ -12,7 +12,7 @@ var randomWord = [{english: "a", japanese: "あ"},{english: "i", japanese: "い"
     
     function startGame() {
         myGameArea.start();
-        myGamePiece = new component(100, 100, "Avatar1.png", 290, 290, "avatar", "image");
+        myGamePiece = new component(30, 30, "stick.png", 290, 290, "avatar", "image");
         objectOne = new component(30, 30, "a.png", 100, 100, "a", "image");
         objectTwo= new component(30, 30, "i.png", 100, 280, "i", "image");
         objectThree= new component(30, 30, "u.png", 100, 500, "u", "image");
@@ -101,16 +101,16 @@ var randomWord = [{english: "a", japanese: "あ"},{english: "i", japanese: "い"
         myGamePiece.speedY = 0;    
         if (myGameArea.key && myGameArea.key == 65) {
             myGamePiece.speedX = -2; 
-            myGamePiece.image.src = "Avatar1-left.png";}
+            myGamePiece.image.src = "stick.png";}
         if (myGameArea.key && myGameArea.key == 68) {
             myGamePiece.speedX = 2; 
-            myGamePiece.image.src = "Avatar1-right.png";}
+            myGamePiece.image.src = "stick.png";}
         if (myGameArea.key && myGameArea.key == 87) {
             myGamePiece.speedY = -2; 
-            myGamePiece.image.src = "Avatar1-back.png";}
+            myGamePiece.image.src = "stick.png";}
         if (myGameArea.key && myGameArea.key == 83) {
             myGamePiece.speedY = 2; 
-            myGamePiece.image.src = "Avatar1.png";}
+            myGamePiece.image.src = "stick.png";}
         myGamePiece.newPos();    
         myGamePiece.update();
         objectOne.update();
