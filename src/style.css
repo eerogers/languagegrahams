@@ -1,20 +1,116 @@
 body {
-    background-image: url('Russian.jpg');
-    background-size: 1800px 900px;
-    background-repeat: no-repeat; 
+    background-image: url("Russian.jpg")
 }
-.title {
-    background-color: palevioletred;
-    color:white;
-    position: fixed;
-    width: 100%;
-    top: 0px;
+
+.column {
+    background-color: burlywood;
+    opacity: .5;
+}
+
+#arabic {
+    top: -20px;
+    height: 170px;
+    border-radius: 10px;
+    font-size: 100px;
+    font-family: 'Teko', sans-serif;
+    padding: 15px;
+    width: 400px;
+    transition: .5s;
+    left: -120px;
+}
+
+#arabic:hover {
+    opacity: .75;
+    height: 500px;
+}
+
+#theHauntedTreasure {
+   display: none;
+   font-size: 26px;
+   padding: 10px;
+   border-style: solid;
+   background-color: cadetblue;
+   transition: 3s;
+}
+
+#arabic:hover > #theHauntedTreasure {
+    display: block;
+   top: 200px;
+}
+
+#japaneseSoundBoard {
+    display: none;
+    font-size: 26px;
     padding: 10px;
-    font-family: 'Press Start 2P', cursive;
-    z-index: 6;
+    border-style: solid;
+    background-color: plum;
+    transition: 3s;
+ }
+ #japanese:hover > #japaneseSoundBoard {
+    display: block;
+   top: 200px;
 }
+/* #books:hover ~ #sounds {
+    opacity: 0;
+}
+
+#sounds:hover ~ #books {
+    opacity: 0;
+} This doesn't work because the affected sibling must come after the specified */
+
+#japanese {
+    position: fixed;
+    font-family: 'Teko', sans-serif;
+    left: 450px;
+    top: 100px;
+    height: 170px;
+    border-radius: 10px;
+    width: 400px;
+    font-size: 100px;
+    padding: 15px;
+    transition: .5s;
+}
+
+#japanese:hover {
+    opacity: .75;
+    height: 500px;
+}
+
+#russian {
+    position: fixed;
+    font-family: 'Teko', sans-serif;
+    left: 870px;
+    top: 100px;
+    height: 170px;
+    border-radius: 10px;
+    width: 400px;
+    font-size: 100px;
+    padding: 15px;
+    transition: .5s;
+}
+
+#russian:hover {
+    opacity: .75;
+    height: 500px;
+}
+#russianCards {
+    display: none;
+    font-size: 26px;
+    padding: 10px;
+    border-style: solid;
+    background-color: plum;
+    transition: 3s;
+ }
+#russian:hover > #russianCards {
+    display: block;
+   top: 200px;
+}
+.row {
+    height: 700px;
+}
+
 .title1 {
-    background-color: palevioletred;
+    background-color: black;
     color:white;
     position: fixed;
     width: 100%;
